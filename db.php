@@ -1,16 +1,20 @@
 <?php
 
+require_once("config.php");
+
+if (!isset($config)) {
+  die("config not found");
+}
+
 class DB {
 	var $conn;
+    var $host = $config["host"];
+    var $user = $config["user"];
+    var $password = $config["password"];
   
   function __construct(){
-		//this->connect();
-		$host= "localhost";
-		$user= "root";
-		$password= "";
-  
 		/* Соединяемся с MySQL */
-		$this->conn = mysql_connect($host,$user,$password)
+		$this->conn = mysql_connect($this->host, $this->user, $this->password);
         /* Проверка соединения */
 		or die("Could not connect : " . mysql_error());
 		//print "Connected successfully";
